@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Social Media Manager – [Dein Name]</title>
+    <style>
+        /* ========== RESET & BASE ========== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0b0b1a;
+            color: #e0e0e0;
+            line-height: 1.7;
+            scroll-behavior: smooth;
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+        /* ========== NAVIGATION ========== */
+        nav {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            background: rgba(11, 11, 26, 0.92);
+            backdrop-filter: blur(8px);
+            padding: 16px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links { display: flex; gap: 28px; list-style: none; }
+
+        .nav-links a {
+            font-size: 0.95rem;
+            color: #b0b0c0;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: #f5576c; }
+
+        .hamburger {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #fff;
+        }
+
+        /* ========== HERO ========== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 24px;
+            background: radial-gradient(circle at 30% 30%, #1a1a3e, #0b0b1a 70%);
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #f093fb, #f5576c, #4facfe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            color: #a0a0b8;
+            margin-bottom: 36px;
+        }
+
+        .hero .age-tag {
+            font-size: 0.9rem;
+            color: #8888aa;
+            margin-bottom: 24px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(245, 87, 108, 0.35);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #f5576c;
+            color: #f5576c;
+            margin-left: 12px;
+        }
+
+        .btn-outline:hover {
+            background: #f5576c;
+            color: #fff;
+        }
+
+        /* ========== SECTIONS ========== */
+        section {
+            padding: 80px 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        section h2 span {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-sub {
+            text-align: center;
+            color: #8888aa;
+            margin-bottom: 48px;
+            font-size: 1.05rem;
+        }
+
+        /* ========== ABOUT ========== */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 48px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .about-text p { margin-bottom: 16px; color: #c0c0d0; }
+
+        .about-text ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .about-text ul li::before {
+            content: "✓ ";
+            color: #f5576c;
+            font-weight: 700;
+        }
+
+        .about-img {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f093fb, #4facfe);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        /* ========== SERVICES ========== */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 28px;
+        }
+
+        .service-card {
+            background: #12122a;
+            padding: 36px 24px;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-6px);
+            border-color: #f5576c;
+        }
+
+        .service-card .icon {
+            font-size: 2.8rem;
+            margin-bottom: 16px;
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .service-card p { color: #a0a0b8; font-size: 0.95rem; }
+
+        /* ========== PRICING ========== */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 28px;
+        }
+
+        .pricing-card {
+            background: #12122a;
+            padding: 40px 28px;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: transform 0.3s;
+        }
+
+        .pricing-card.featured {
+            border: 2px solid #f5576c;
+            transform: scale(1.03);
+        }
+
+        .pricing-card h3 { font-size: 1.4rem; margin-bottom: 8px; }
+
+        .pricing-card .price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #fff;
+            margin: 16px 0;
+        }
+
+        .pricing-card .price sup {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #8888aa;
+        }
+
+        .pricing-card ul {
+            list-style: none;
+            margin: 20px 0 28px;
+            text-align: left;
+            padding: 0 12px;
+        }
+
+        .pricing-card ul li {
+            padding: 6px 0;
+            color: #b0b0c8;
+        }
+
+        .pricing-card ul li::before {
+            content: "✓ ";
+            color: #4facfe;
+        }
+
+        .pricing-card .btn {
+            width: 100%;
+            padding: 12px;
+        }
+
+        /* ========== CONTACT ========== */
+        .contact-form {
+            max-width: 520px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: #12122a;
+            color: #e0e0e0;
+            font-size: 1rem;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: #f5576c;
+        }
+
+        .contact-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .contact-form .btn { align-self: center; }
+
+        .contact-info {
+            text-align: center;
+            margin-top: 32px;
+            color: #8888aa;
+        }
+
+        .contact-info a { color: #f5576c; }
+
+        /* ========== FOOTER ========== */
+        footer {
+            text-align: center;
+            padding: 32px 24px;
+            color: #555570;
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            nav { padding: 12px 20px; }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                right: 20px;
+                background: rgba(11, 11, 26, 0.98);
+                padding: 20px;
+                border-radius: 12px;
+                gap: 16px;
+            }
+            .nav-links.active { display: flex; }
+            .hamburger { display: block; }
+
+            .hero h1 { font-size: 2.2rem; }
+            .hero p { font-size: 1rem; }
+
+            section { padding: 48px 20px; }
+            section h2 { font-size: 1.8rem; }
+
+            .about-content { flex-direction: column-reverse; text-align: center; }
+            .about-text ul { grid-template-columns: 1fr; }
+
+            .pricing-card.featured { transform: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVIGATION ===== -->
+    <nav>
+        <div class="logo">📱 SocialBoost</div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#about">Über mich</a></li>
+            <li><a href="#services">Leistungen</a></li>
+            <li><a href="#pricing">Preise</a></li>
+            <li><a href="#contact">Kontakt</a></li>
+        </ul>
+        <span class="hamburger" id="hamburger">☰</span>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+        <p class="age-tag">🔞 13 Jahre • jung • motiviert • günstig</p>
+        <h1>Social Media<br />für lokale Businesses</h1>
+        <p>
+            Ich helfe kleinen Unternehmen in deiner Umgebung auf Instagram &amp; TikTok
+            durchzustarten – mit kreativen Posts, Storys und einer klaren Strategie.
+        </p>
+        <div>
+            <a href="#contact" class="btn">Jetzt anfragen</a>
+            <a href="#pricing" class="btn btn-outline">Preise ansehen</a>
+        </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section id="about">
+        <h2>👋 <span>Über mich</span></h2>
+        <p class="section-sub">Warum du mir deine Social-Media-Kanäle anvertrauen kannst</p>
+        <div class="about-content">
+            <div class="about-text">
+                <p>
+                    Hey! Ich bin <strong>[Dein Name]</strong>, 13 Jahre alt und lebe in [Deine Stadt].
+                    Schon seit ich 10 bin, interessiere ich mich für Social Media – nicht nur zum
+                    Scrollen, sondern um zu verstehen, was funktioniert.
+                </p>
+                <p>
+                    Mittlerweile habe ich gelernt, wie der Instagram-Algorithmus tickt, wie man
+                    ansprechende Bildinhalte erstellt und wie man aus einem stillen Profil eine
+                    wachsende Community macht. Mein Ziel: <strong>lokalen Unternehmen helfen</strong>,
+                    die selbst keine Zeit für ihre Social-Media-Präsenz haben.
+                </p>
+                <ul>
+                    <li>Content-Erstellung</li>
+                    <li>Instagram &amp; TikTok</li>
+                    <li>Hashtag-Strategien</li>
+                    <li>Story-Planung</li>
+                    <li>Community-Management</li>
+                    <li>Zahlreiche Canva-Vorlagen</li>
+                </ul>
+            </div>
+            <div class="about-img">😎</div>
+        </div>
+    </section>
+
+    <!-- ===== SERVICES ===== -->
+    <section id="services">
+        <h2>📋 <span>Was ich biete</span></h2>
+        <p class="section-sub">Alles, was dein Social-Media-Auftritt braucht – aus einer Hand</p>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="icon">🎨</div>
+                <h3>Content-Erstellung</h3>
+                <p>Maßgeschneiderte Posts, Storys und Reels für deine Marke – erstellt mit Canva &amp; CapCut.</p>
+            </div>
+            <div class="service-card">
+                <div class="icon">📅</div>
+                <h3>Post-Planung</h3>
+                <p>Ich plane deinen gesamten Content-Kalender: 3–5 Posts pro Woche, abgestimmt auf deine Zielgruppe.</p>
+            </div>
+            <div class="service-card">
+                <div class="icon">📈</div>
+                <h3>Wachstumsstrategie</h3>
+                <p>Hashtag-Recherche, optimale Posting-Zeiten und Engagement-Boosting – alles getestet und bewährt.</p>
+            </div>
+            <div class="service-card">
+                <div class="icon">💬</div>
+                <h3>Community-Pflege</h3>
+                <p>Ich beantworte DMs, kommentiere zurück und sorge dafür, dass deine Follower sich wertgeschätzt fühlen.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PRICING ===== -->
+    <section id="pricing">
+        <h2>💰 <span>Meine Preise</span></h2>
+        <p class="section-sub">Fair & transparent – speziell für kleine Unternehmen</p>
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3>Starter</h3>
+                <div class="price">29<sup>€</sup> <span style="font-size: 1rem; color: #8888aa;">/ Monat</span></div>
+                <ul>
+                    <li>4 Feed-Posts pro Monat</li>
+                    <li>8 Storys pro Woche</li>
+                    <li>Hashtag-Recherche</li>
+                    <li>1x monatlicher Report</li>
+                </ul>
+                <a href="#contact" class="btn" style="padding: 12px; font-size: 0.9rem;">Buchen</a>
+            </div>
+            <div class="pricing-card featured">
+                <h3>🔥 Beliebt</h3>
+                <div class="price">49<sup>€</sup> <span style="font-size: 1rem; color: #8888aa;">/ Monat</span></div>
+                <ul>
+                    <li>8 Feed-Posts pro Monat</li>
+                    <li>12 Storys pro Woche</li>
+                    <li>2 Reels pro Monat</li>
+                    <li>Hashtag- & Trend-Recherche</li>
+                    <li>Wöchentlicher Report</li>
+                    <li>Direkter Chat-Support</li>
+                </ul>
+                <a href="#contact" class="btn" style="padding: 12px; font-size: 0.9rem;">Buchen</a>
+            </div>
+            <div class="pricing-card">
+                <h3>Premium</h3>
+                <div class="price">79<sup>€</sup> <span style="font-size: 1rem; color: #8888aa;">/ Monat</span></div>
+                <ul>
+                    <li>12 Feed-Posts pro Monat</li>
+                    <li>Unbegrenzte Storys</li>
+                    <li>4 Reels pro Monat</li>
+                    <li>Komplette Strategie</li>
+                    <li>Community-Management</li>
+                    <li>Monatliches Strategie-Call</li>
+                </ul>
+                <a href="#contact" class="btn" style="padding: 12px; font-size: 0.9rem;">Buchen</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section id="contact">
+        <h2>📬 <span>Schreib mir</span></h2>
+        <p class="section-sub">Einfach melden – ich antworte innerhalb von 24 Stunden</p>
+        <form class="contact-form" action="#" method="post">
+            <input type="text" name="name" placeholder="Dein Name" required />
+            <input type="email" name="email" placeholder="Deine E-Mail-Adresse" required />
+            <input type="text" name="business" placeholder="Name deines Unternehmens (optional)" />
+            <textarea name="message" placeholder="Was brauchst du? Beschreib kurz dein Projekt..."></textarea>
+            <button type="submit" class="btn">Nachricht senden</button>
+        </form>
+        <p class="contact-info">
+            📧 <a href="mailto:deine@email.de">deine@email.de</a> &nbsp;|&nbsp; 📱 Instagram: <a href="#">@dein.profil</a>
+        </p>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        &copy; 2025 SocialBoost – [Dein Name]. Alle Rechte vorbehalten. <br />
+        Made mit 💖 von einem 13-jährigen Unternehmer.
+    </footer>
+
+    <!-- ===== HAMBURGER MENU SCRIPT ===== -->
+    <script>
+        document.getElementById('hamburger').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
